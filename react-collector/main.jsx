@@ -5,12 +5,14 @@ const COLLECTOR_ENDPOINT = "http://localhost:8080"
 
 class MarkerComponent extends React.Component {
 
-    constructor(props, context) {
-        super(props, context);
+    constructor(props) {
+        super(props);
 
         this.state = {
-           hovering: false,
-           count: -1, // undefined
+            hovering: false,
+            count: -1, // undefined
+            location: "unknown",
+            ip: "unknown"
         }
     }
 
@@ -35,28 +37,47 @@ class MarkerComponent extends React.Component {
         }
     }
 
+    loadConfiguration = () => {
+        const url = `${COLLECTOR_ENDPOINT}/devices/${this.props.device}`
+
+        fetch(url)
+            .then(response => {
+                // forcing to run into the catch block when HTTP status code errors
+                if (response.ok) {
+                    return response.json()
+                }
+
+                throw new Error('Something went wrong ...')
+            })
+            .then(device => this.setState({ location: device.location, ip: device.ip }))
+            .catch(err => {
+                // something went wrong
+                console.log(`could not load configuration for device: ${this.props.device}, err: ${err}`)
+            })
+    }
+
     updatePeopleCount = () => {
         const url = `${COLLECTOR_ENDPOINT}/devices/${this.props.name}/average?period=30`
 
         fetch(url)
-        .then(response => {
-            // forcing to run into the catch block when HTTP status code errors
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error('Something went wrong ...');
-            }
-        })
-        .then(data => this.setState({ count: data.peopleCount }))
-        .catch(error => {
-            // something went wrong
-            this.setState({ count: -1 })
-        })
+            .then(response => {
+                // forcing to run into the catch block when HTTP status code errors
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Something went wrong ...');
+                }
+            })
+            .then(data => this.setState({ count: data.peopleCount }))
+            .catch(error => {
+                // something went wrong
+                this.setState({ count: -1 })
+            })
     }
 
     componentDidMount() {
-        // initialize counter for device
-        this.updatePeopleCount()
+        // load settings for device
+        this.loadConfiguration()
 
         // regularly update counter
         const self = this;
@@ -66,8 +87,8 @@ class MarkerComponent extends React.Component {
     }
 
     render() {
-        const { x, y, location, ip, name } = this.props;
-        const { count } = this.state;
+        const { x, y } = this.props;
+        const { location, ip, count } = this.state;
 
         const diameter = `${this.countToDiameter(count)}px`
 
@@ -78,7 +99,7 @@ class MarkerComponent extends React.Component {
             className = "Low"
         else if (count >= 0)
             className = "Nobody"
-        else 
+        else
             className = "Undefined"
 
         var countLabel = "" + count;
@@ -126,11 +147,11 @@ class MapComponent extends React.Component {
         return (
             <div className="map-container">
                 <img src="img/devnetcreate-map.png" />
-                <MarkerComponent device="Workbench1" location="Workshop 1" x="819px" y="398px" ip="http://192.168.1.32" />
-                <MarkerComponent device="Workbench2" location="Workshop 2" x="662px" y="536px" ip="http://192.168.1.33" />
-                <MarkerComponent device="Workbench3" location="Workshop 3" x="954px" y="536px" ip="http://192.168.1.34" />
-                <MarkerComponent device="Workbench4" location="Workshop 4" x="1113px" y="280px" ip="http://192.168.1.35" />
-                <MarkerComponent device="Workbench5" location="Workshop 5" x="978px" y="372px" ip="http://192.168.1.36" />
+                <MarkerComponent device="Workbench1" x="819px" y="398px" />
+                <MarkerComponent device="Workbench2" x="662px" y="536px" />
+                <MarkerComponent device="Workbench3" x="954px" y="536px" />
+                <MarkerComponent device="Workbench4" x="1113px" y="280px" />
+                <MarkerComponent device="Workbench5" x="978px" y="372px" />
             </div>
 
         )
