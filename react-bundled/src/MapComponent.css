@@ -1,0 +1,7 @@
+.map-container {
+    position:relative;
+    width:1600px
+}
+.map-container img{
+    width:100%
+}
