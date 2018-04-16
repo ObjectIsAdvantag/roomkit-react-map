@@ -49,7 +49,7 @@ class MarkerComponent extends Component {
 
                 throw new Error('Something went wrong ...')
             })
-            .then(device => this.setState({ location: device.location, ip: device.ip }))
+            .then(device => this.setState({ location: device.location, ip: device.ipAddress }))
             .catch(err => {
                 // something went wrong
                 console.log(`could not load configuration for device: ${this.props.device}, err: ${err}`)
