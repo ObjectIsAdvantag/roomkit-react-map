@@ -1,19 +1,18 @@
 html,body {
-    margin: 0;
-    padding: 0;
+    margin: 15px;
+    padding-top: 80px;
     position: relative;
     width: 100%;
-  }
+}
   
 body {
     font-family: Verdana;
     position: relative;
 }
   
-
 .map-container{
     position:relative;
-    width:1600px
+    width:1500px
 }
 .map-container img{
     width:100%

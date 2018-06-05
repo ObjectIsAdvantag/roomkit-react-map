@@ -49,7 +49,7 @@ class MarkerComponent extends React.Component {
 
                 throw new Error('Something went wrong ...')
             })
-            .then(device => this.setState({ location: device.location, ip: device.ip }))
+            .then(device => this.setState({ location: device.location, ip: device.ipAddress }))
             .catch(err => {
                 // something went wrong
                 console.log(`could not load configuration for device: ${this.props.device}, err: ${err}`)
@@ -143,11 +143,16 @@ class MapComponent extends React.Component {
     render() {
         return (
             <div className="map-container">
-                <img src="img/Roomkit-map-1600x900.png" />
-                <MarkerComponent device="Workbench1" x="929px" y="510px" />
-                <MarkerComponent device="Workbench2" x="785px" y="626px" />
-                <MarkerComponent device="Workbench3" x="956px" y="714px" />
-                <MarkerComponent device="Workbench4" x="1266px" y="516px" />
+                <img src="img/devnetzone.png" />
+                <MarkerComponent device="Workbench1" x="94px" y="372px" />
+                <MarkerComponent device="Workbench2" x="160px" y="317px" />
+                <MarkerComponent device="Workbench3" x="350px" y="92px" />
+                <MarkerComponent device="Workbench4" x="516px" y="93px" />
+                <MarkerComponent device="Workbench5" x="957px" y="97px" />
+                <MarkerComponent device="Workbench6" x="1125px" y="98px" />
+                <MarkerComponent device="Workbench7" x="1321px" y="268px" />
+                <MarkerComponent device="Workbench8" x="1415px" y="360px" />
+                <MarkerComponent device="ClassRoom2" x="1380px" y="95px" />
             </div>
 
         )
