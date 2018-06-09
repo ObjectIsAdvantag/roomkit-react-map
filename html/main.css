@@ -1,0 +1,95 @@
+html,body {
+    position: relative;
+    width: 100%;
+    background-color: #1A1A1A;
+}
+  
+body {
+    font-family: Verdana;
+    position: relative;
+}
+
+.map-container{
+    position:relative;
+    width:1280px
+}
+.map-container img{
+    width:100%
+}
+
+.marker-container{
+    position:absolute
+}
+.marker-container .marker-inner{
+    position:relative
+
+}
+.marker-container .marker-inner .inner-circle{
+    position:absolute;
+    border-radius:50%;
+    width:12px;height:12px;
+    background-color:#696969;
+    border:1px solid #fff;
+    -webkit-box-shadow:1px 1px px 0 rgba(0,0,0,.59);
+    box-shadow:1px 1px 5px 0 rgba(0,0,0,.59);
+    cursor:pointer;
+    -webkit-transform:translate(-50%,-50%);
+    transform:translate(-50%,-50%);
+    -webkit-transition:background .3s;
+    transition:background .3s;
+    z-index:999
+}
+.marker-container .marker-inner .inner-circle:hover{
+    background-color:#3b5fba;
+    -webkit-box-shadow:1px 1px 7px 0 rgba(0,0,0,.59);
+    box-shadow:1px 1px 7px 0 rgba(0,0,0,.59)
+}
+
+.marker-container .marker-inner .count-circle{
+    position:absolute;
+    border-radius:50%;
+    z-index:1;
+    -webkit-transform:translate(-50%,-50%);
+    transform:translate(-50%,-50%);
+    background-color:rgba(211,211,211,.44);
+    -webkit-transition:height .1s ease-out,width .1s ease-out,background .2s;
+    transition:height .1s ease-out,width .1s ease-out,background .2s
+}
+.marker-container .marker-inner .count-circle.High{
+    background-color: rgba(0,237,135,.44)
+}
+.marker-container .marker-inner .count-circle.Low{
+    background-color: rgba(255,221,51,.44)
+}
+.marker-container .marker-inner .count-circle.Empty{
+    background-color: rgba(140,140,140,.44)
+}
+.marker-container .marker-inner .count-circle.Standby{
+    background-color: rgba(211,49,80,.44)
+}
+
+.marker-container .marker-inner .info-card{
+    position:absolute;
+    z-index:999999;
+    margin-top:5px;
+    margin-left:5px;
+    background-color:#fff;
+    padding:5px 15px;
+    -webkit-box-shadow:0 1px 10px 1px grey;
+    box-shadow:0 1px 10px 1px grey;
+    font-size: smaller
+}
+.marker-container .marker-inner .info-card div span{
+    display:block;
+    word-break:keep-all;
+    white-space:pre
+}
+.marker-container .marker-inner .info-card div span:first-child{
+    margin-top:5px;
+    font-weight:bolder;
+    display:block;
+    color:#000
+}
+.marker-container .marker-inner .info-card div span:last-child{
+    margin-bottom:5px
+}
