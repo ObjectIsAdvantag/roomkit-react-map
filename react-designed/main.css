@@ -1,18 +1,17 @@
 html,body {
-    margin: 15px;
-    padding-top: 80px;
     position: relative;
     width: 100%;
+    background-color: #1A1A1A;
 }
   
 body {
     font-family: Verdana;
     position: relative;
 }
-  
+
 .map-container{
     position:relative;
-    width:1500px
+    width:1280px
 }
 .map-container img{
     width:100%
@@ -29,9 +28,9 @@ body {
     position:absolute;
     border-radius:50%;
     width:12px;height:12px;
-    background-color: rgba(0,0,0,.59);
-    border:3px solid #fff;
-    -webkit-box-shadow:1px 1px 5px 0 rgba(0,0,0,.59);
+    background-color:#696969;
+    border:1px solid #fff;
+    -webkit-box-shadow:1px 1px px 0 rgba(0,0,0,.59);
     box-shadow:1px 1px 5px 0 rgba(0,0,0,.59);
     cursor:pointer;
     -webkit-transform:translate(-50%,-50%);
@@ -39,9 +38,6 @@ body {
     -webkit-transition:background .3s;
     transition:background .3s;
     z-index:999
-}
-.marker-container .marker-inner .inner-circle:High{
-    background-color:rgba(163, 206, 94, 0.8)
 }
 .marker-container .marker-inner .inner-circle:hover{
     background-color:#3b5fba;
@@ -60,16 +56,16 @@ body {
     transition:height .1s ease-out,width .1s ease-out,background .2s
 }
 .marker-container .marker-inner .count-circle.High{
-    background-color:rgba(163, 206, 94, 0.8)
+    background-color: rgba(0,237,135,.44)
 }
 .marker-container .marker-inner .count-circle.Low{
-    background-color:rgba(242, 151, 33, 0.8)
+    background-color: rgba(255,221,51,.44)
 }
 .marker-container .marker-inner .count-circle.Empty{
-    background-color:rgba(140, 140, 140, 0.8)
+    background-color: rgba(140,140,140,.44)
 }
 .marker-container .marker-inner .count-circle.Standby{
-    background-color:rgba(240,94,92, 0.8)
+    background-color: rgba(211,49,80,.44)
 }
 
 .marker-container .marker-inner .info-card{
