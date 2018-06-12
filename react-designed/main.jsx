@@ -151,7 +151,6 @@ class MapComponent extends React.Component {
                 <MarkerComponent device="Workbench5" x="765px" y="302px" />
                 <MarkerComponent device="Workbench6" x="871px" y="299px" />
                 <MarkerComponent device="Workbench7" x="1009px" y="416px" />
-                <MarkerComponent device="Workbench8" x="1065px" y="484px" />
                 <MarkerComponent device="ClassRoom2" x="1055px" y="285px" />
             </div>
 
