@@ -18,7 +18,6 @@ Launch RoomKit collector Mock from a terminal
 ```shell
 git clone https://github.com/ObjectIsAdvantag/roomkit-collector
 cd roomkit-collector
-cd api
 npm install
 node mock.js
 ```
