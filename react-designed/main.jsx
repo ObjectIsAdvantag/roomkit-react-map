@@ -57,7 +57,7 @@ class MarkerComponent extends React.Component {
     }
 
     updatePeopleCount = () => {
-        const url = `${COLLECTOR_ENDPOINT}/devices/${this.props.name}/average?period=30`
+        const url = `${COLLECTOR_ENDPOINT}/devices/${this.props.device}/average?period=30`
 
         fetch(url)
             .then(response => {
@@ -92,17 +92,20 @@ class MarkerComponent extends React.Component {
 
         const diameter = `${this.countToDiameter(count)}px`
 
-        let className = "Standby" // Defaults to -1
+        let className = "Standby" // Defaults to count == -1 or "undefined"
         if (count >= 4)
             className = "High"
         else if (count >= 1)
             className = "Low"
-        else if (count == 0)
+        else if (count === 0)
             className = "Empty"
 
         var countLabel = "" + count;
-        if (count == -1) {
+        if (count === -1) {
             countLabel == "not counting";
+        }
+        if (count === undefined) {
+            countLabel == "not reachable";
         }
 
         return (
@@ -151,7 +154,7 @@ class MapComponent extends React.Component {
                 <MarkerComponent device="Workbench5" x="765px" y="302px" />
                 <MarkerComponent device="Workbench6" x="871px" y="299px" />
                 <MarkerComponent device="Workbench7" x="1009px" y="416px" />
-                <MarkerComponent device="ClassRoom2" x="1055px" y="285px" />
+                <MarkerComponent device="Classroom2" x="1055px" y="285px" />
             </div>
 
         )
