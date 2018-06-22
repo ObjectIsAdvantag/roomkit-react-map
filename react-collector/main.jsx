@@ -12,7 +12,7 @@ class MarkerComponent extends React.Component {
             hovering: false,
             count: -1, // undefined
             location: "unknown",
-            ip: "unknown"
+            ipAddress: "unknown"
         }
     }
 
@@ -49,7 +49,7 @@ class MarkerComponent extends React.Component {
 
                 throw new Error('Something went wrong ...')
             })
-            .then(device => this.setState({ location: device.location, ip: device.ip }))
+            .then(device => this.setState({ location: device.location, ipAddress: device.ipAddress }))
             .catch(err => {
                 // something went wrong
                 console.log(`could not load configuration for device: ${this.props.device}, err: ${err}`)
@@ -57,7 +57,7 @@ class MarkerComponent extends React.Component {
     }
 
     updatePeopleCount = () => {
-        const url = `${COLLECTOR_ENDPOINT}/devices/${this.props.name}/average?period=30`
+        const url = `${COLLECTOR_ENDPOINT}/devices/${this.props.device}/average?period=30`
 
         fetch(url)
             .then(response => {
@@ -87,25 +87,27 @@ class MarkerComponent extends React.Component {
     }
 
     render() {
+
         const { x, y } = this.props;
-        const { location, ip, count } = this.state;
+        const { location, ipAddress, count } = this.state;
+
+        // Pick the outer circle style depending on the PeopleCount value
+        let className = "Standby" // Defaults for -1 (not counting) and undefined (no capability, wrong address)
+        if (count > 3)
+            className = "High"
+        else if (count > 0)
+            className = "Low"
+        else if (count == 0)
+            className = "Empty"
 
         const diameter = `${this.countToDiameter(count)}px`
 
-        let className = ""
-        if (count >= 3)
-            className = "High"
-        else if (count >= 1)
-            className = "Low"
-        else if (count >= 0)
-            className = "Nobody"
-        else
-            className = "Undefined"
-
-        var countLabel = "" + count;
-        if (count == -1) {
-            countLabel == "not counting";
-        }
+        let countLabel;
+        if (count === undefined)
+            countLabel = "N/A"; // configuration error
+        else if (count === -1)
+            countLabel == "not counting"
+        else countLabel = "" + Math.round(count + 0.49) + " (" + Math.round(count*100)/100 + ")"
 
         return (
             <div className="marker-container" style={{ top: y, left: x }}>
@@ -125,7 +127,7 @@ class MarkerComponent extends React.Component {
                             </div>
                             <div>
                                 <span>IP Address</span>
-                                <span>{ip}</span>
+                                <span>{ipAddress}</span>
                             </div>
                             <div>
                                 <span>People Count</span>
@@ -151,7 +153,6 @@ class MapComponent extends React.Component {
                 <MarkerComponent device="Workbench2" x="662px" y="536px" />
                 <MarkerComponent device="Workbench3" x="954px" y="536px" />
                 <MarkerComponent device="Workbench4" x="1113px" y="280px" />
-                <MarkerComponent device="Workbench5" x="978px" y="372px" />
             </div>
 
         )

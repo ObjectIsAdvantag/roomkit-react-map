@@ -29,7 +29,7 @@ class MarkerComponent extends React.Component {
     };
 
     render() {
-        const { x, y, location, ip, count } = this.props;
+        const { x, y, location, ipAddress, count } = this.props;
 
         const diameter = `${this.countToDiameter(count)}px`;
 
@@ -59,7 +59,7 @@ class MarkerComponent extends React.Component {
                             </div>
                             <div>
                                 <span>IP Address</span>
-                                <span>{ip}</span>
+                                <span>{ipAddress}</span>
                             </div>
                             <div>
                                 <span>People Count</span>
@@ -81,7 +81,7 @@ class MapComponent extends React.Component {
         return (
             <div className="map-container">
                 <img src="img/devnetcreate-map.png" />
-                <MarkerComponent location="Workshop 1" x="819px" y="398px" count="3" ip="http://192.168.1.32" />
+                <MarkerComponent location="Workshop 1" x="819px" y="398px" count="-1" ipAddress="192.168.1.32" />
             </div>
         );
     }
